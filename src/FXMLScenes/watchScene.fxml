@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@../styles.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.WatchSceneController">
+   <children>
+      <Text layoutX="237.0" layoutY="50.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Clock App">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+      </Text>
+      <Label fx:id="watchDisplayLabel" alignment="TOP_CENTER" layoutX="208.0" layoutY="180.0" text="00:00:00">
+         <font>
+            <Font name="Bookman Old Style Bold" size="39.0" />
+         </font>
+      </Label>
+      <HBox alignment="TOP_CENTER" layoutX="157.0" layoutY="77.0" prefHeight="51.0" prefWidth="290.0" spacing="10.0" style="-fx-background-radius: 100; -fx-background-color: #7dacf3;" styleClass="rounded-button">
+         <children>
+            <Button mnemonicParsing="false" text="Watch" textAlignment="CENTER">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+               <styleClass>
+                  <String fx:value="rounded-button" />
+                  <String fx:value="active-button" />
+               </styleClass>
+            </Button>
+            <Button mnemonicParsing="false" onAction="#onChangeSceneToTimer" styleClass="rounded-button" text="Timer" textAlignment="CENTER">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Button>
+            <Button layoutX="105.0" layoutY="18.0" mnemonicParsing="false" onAction="#onChangeSceneToStopwatch" styleClass="rounded-button" text="Stop Watch" textAlignment="CENTER">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Button>
+         </children>
+         <padding>
+            <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+         </padding>
+      </HBox>
+   </children>
+</AnchorPane>
