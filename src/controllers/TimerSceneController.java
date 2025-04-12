@@ -11,23 +11,16 @@ import javafx.stage.Stage;
 
 public class TimerSceneController {
 
-    private Stage stage;
-
-    private void setMainStage(Stage stageName) {
-        this.stage = stageName;
-    }
+    @FXML 
+    AnchorPane mainContainer;
 
     @FXML
     void onChangeSceneToWatch(ActionEvent event) {
         try {
         
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../FXMLScenes/watchScene.fxml"));
-            Parent root = fxmlLoader.load();
-            WatchSceneController controller = fxmlLoader.getController();
-            controller.setMainStage(stage);
-
-            stage.setScene(new Scene(root));
-            stage.show();
+            Parent root = fxmlLoader.load();            
+            mainContainer.getChildren().setAll(root);
 
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -40,19 +33,11 @@ public class TimerSceneController {
         
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../FXMLScenes/stopwatchScene.fxml"));
             Parent root = fxmlLoader.load();
-            StopwatchSceneController controller = fxmlLoader.getController();
-            controller.setMainWindow(stage);
-
-            stage.setScene(new Scene(root));
-            stage.show();
+            mainContainer.getChildren().setAll(root);
 
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
     }
-
-	public void setMainWindow(Stage primaryStage) {
-        this.stage = primaryStage;
-	}
 
 }

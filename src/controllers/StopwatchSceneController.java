@@ -10,15 +10,8 @@ import javafx.stage.Stage;
 
 public class StopwatchSceneController {
 
-    private Stage stage;
-
-    private void setMainStage(Stage stageName) {
-        this.stage = stageName;
-    }
-
-	public void setMainWindow(Stage primaryStage) {
-        this.stage = primaryStage;
-	}
+    @FXML
+    private AnchorPane mainContainer;
 
     @FXML
     void onChangeSceneToWatch(ActionEvent event) {
@@ -26,11 +19,7 @@ public class StopwatchSceneController {
         
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../FXMLScenes/watchScene.fxml"));
             Parent root = fxmlLoader.load();
-            WatchSceneController controller = fxmlLoader.getController();
-            controller.setMainStage(stage);
-
-            stage.setScene(new Scene(root));
-            stage.show();
+            mainContainer.getChildren().setAll(root);
 
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -43,11 +32,7 @@ public class StopwatchSceneController {
         
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../FXMLScenes/timerScene.fxml"));
             Parent root = fxmlLoader.load();
-            TimerSceneController controller = fxmlLoader.getController();
-            controller.setMainWindow(stage);
-
-            stage.setScene(new Scene(root));
-            stage.show();
+            mainContainer.getChildren().setAll(root);
 
         } catch (Exception e) {
             System.out.println(e.getMessage());

@@ -5,19 +5,14 @@
     "version": "0.2.0",
     "configurations": [
         
-        {
-            "type": "java",
-            "name": "Current File",
-            "request": "launch",
-            "mainClass": "${file}"
-        },
+        
         {
             "type": "java",
             "name": "App",
             "request": "launch",
             "mainClass": "App",
-            "projectName": "ClockJFX_670cea2e",
+            "projectName": "ClockApp_c3c47116",
             "vmArgs": "--enable-native-access=javafx.graphics --module-path \"C:/Program Files/Java/javafx-sdk-24/lib\" --add-modules javafx.controls,javafx.fxml"
-        }
+        },
     ]
 }

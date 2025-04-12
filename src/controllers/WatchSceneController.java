@@ -16,38 +16,33 @@ import watch.Watch;
 
 public class WatchSceneController implements Runnable {
 
-    private Stage stage;
     public Watch watch;
 
     @FXML
     Label watchDisplayLabel;
 
-    public void setMainStage(Stage stageName) {
-        this.stage = stageName;
-    }
+    @FXML
+    AnchorPane mainContainer;
 
     @Override
     public void run() {
 
+        // start running the time
+        watch = new Watch();
+        watch.setVisibility(true);
+
+        // create the thread
+        Thread watchThread = new Thread(watch);
+        watchThread.start();
+
         while (true) {
                     
             try {
-            
-                // start running the time
-                watch = new Watch();
-                watch.setVisibility(true);
-
-                // create the thread
-                Thread watchThread = new Thread(watch);
-                watchThread.start();
-                
-                // Platform.runLater(() -> {
-                    this.setSceneTime(watch.timeString);
-                // });
+        
+                this.setSceneTime(watch.timeString);
 
                 // runs every 1 second
                 Thread.sleep(1000);
-                
 
             } catch (Exception e) {
 
@@ -78,11 +73,8 @@ public class WatchSceneController implements Runnable {
         
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../FXMLScenes/timerScene.fxml"));
             Parent root = fxmlLoader.load();
-            TimerSceneController controller = fxmlLoader.getController();
-            controller.setMainWindow(stage);
 
-            stage.setScene(new Scene(root));
-            stage.show();
+            mainContainer.getChildren().setAll(root);
 
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -96,11 +88,7 @@ public class WatchSceneController implements Runnable {
         
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../FXMLScenes/stopwatchScene.fxml"));
             Parent root = fxmlLoader.load();
-            StopwatchSceneController controller = fxmlLoader.getController();
-            controller.setMainWindow(stage);
-
-            stage.setScene(new Scene(root));
-            stage.show();
+            mainContainer.getChildren().setAll(root);
 
         } catch (Exception e) {
             System.out.println(e.getMessage());
