@@ -1,4 +1,4 @@
-package countdownTimer;
+package timer;
 
 import java.util.Scanner;
 import java.util.Timer;

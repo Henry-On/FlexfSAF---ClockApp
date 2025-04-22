@@ -1,98 +1,50 @@
 package controllers;
 
-import javafx.application.Application;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import javafx.application.Platform;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
-import javafx.scene.layout.AnchorPane;
-import javafx.stage.Stage;
 
-import watch.Watch;
-
-public class WatchSceneController implements Runnable {
-
-    public Watch watch;
+public class WatchSceneController {
 
     @FXML
-    Label watchDisplayLabel;
+    private Label watchDisplayLabel;
+
+    private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
+
+    private volatile boolean running = true;
 
     @FXML
-    AnchorPane mainContainer;
+    public void initialize() {
+        // Called after FXML fields are injected
+        startClockThread();
+    }
 
-    @Override
-    public void run() {
-
-        // start running the time
-        watch = new Watch();
-        watch.setVisibility(true);
-
-        // create the thread
-        Thread watchThread = new Thread(watch);
-        watchThread.start();
-
-        while (true) {
-                    
-            try {
+    private void startClockThread() {
         
-                this.setSceneTime(watch.timeString);
+        Thread clockThread = new Thread(() -> {
+            while (running) {
+                String currentTime = LocalDateTime.now().format(formatter);
 
-                // runs every 1 second
-                Thread.sleep(1000);
+                // Update UI safely on JavaFX Application Thread
+                Platform.runLater(() -> watchDisplayLabel.setText(currentTime));
 
-            } catch (Exception e) {
-
-                System.out.println(e);
-
+                try {
+                    Thread.sleep(1000); // wait 1 second
+                } catch (InterruptedException e) {
+                    Thread.currentThread().interrupt(); // restore interrupt flag
+                    break;
+                }
             }
+        });
 
-        }
-
+        clockThread.setDaemon(true); // ensures thread stops when app closes
+        clockThread.start();
     }
 
-
-    public void setSceneTime(String time) {
-
-        /**
-         * JavaFX does not allow UI element from a background thread
-         * JavaFX only allows UI updates from the JavaFX Application Thread
-         * Platform.runLater() schedules the update to run safely on the JavaFX Application Thread
-         */
-        Platform.runLater(()->{
-            this.watchDisplayLabel.setText(time);
-        });    
+    // Optional: a method to stop the clock if needed
+    public void stopClock() {
+        running = false;
     }
-
-    @FXML
-    void onChangeSceneToTimer(ActionEvent event) {
-        try {
-        
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../FXMLScenes/timerScene.fxml"));
-            Parent root = fxmlLoader.load();
-
-            mainContainer.getChildren().setAll(root);
-
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
-
-    }
-
-    @FXML
-    void onChangeSceneToStopwatch(ActionEvent event) {
-        try {
-        
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../FXMLScenes/stopwatchScene.fxml"));
-            Parent root = fxmlLoader.load();
-            mainContainer.getChildren().setAll(root);
-
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
-    }
-
 }

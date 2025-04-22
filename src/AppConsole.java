@@ -1,171 +1,171 @@
-// import java.util.Scanner;
+import java.util.Scanner;
 
-// import countdownTimer.CountdownTimer;
-// import watch.Watch;
-// import stopwatch.Stopwatch;
+import timer.CountdownTimer;
+import watch.Watch;
+import stopwatch.Stopwatch;
 
-// class AppConsole {
+class AppConsole {
 
-//     public static void main(String[] args) {
+    public static void main(String[] args) {
     
-//         System.out.println("ClockApp, select mode: ");
-//         int mode;
+        System.out.println("ClockApp, select mode: ");
+        int mode;
 
-//         Scanner scanner = new Scanner(System.in);
+        Scanner scanner = new Scanner(System.in);
 
-//         while (true) {
+        while (true) {
     
-//             System.out.print("[1 => Watch, 2 => Stopwatch, 3 => Timer, 4 => Alarm, 0 => Exit App] Your Answer: ");
-//             String selectedMode = scanner.nextLine().trim().toUpperCase();
-//             String answer;
+            System.out.print("[1 => Watch, 2 => Stopwatch, 3 => Timer, 4 => Alarm, 0 => Exit App] Your Answer: ");
+            String selectedMode = scanner.nextLine().trim().toUpperCase();
+            String answer;
 
-//             try {
+            try {
 
-//                 mode = Integer.parseInt(selectedMode); 
+                mode = Integer.parseInt(selectedMode); 
 
-//                 if( mode == 0 ) {
-//                     break;
-//                 }
-//                 else if( mode == 1 ) {
+                if( mode == 0 ) {
+                    break;
+                }
+                else if( mode == 1 ) {
 
-//                     System.out.println("[MODE : Watch]");
+                    System.out.println("[MODE : Watch]");
                     
-//                     Watch watch = new Watch();
-//                     watch.setVisibility(true);
+                    Watch watch = new Watch();
+                    watch.setVisibility(true);
 
-//                     // create the thread
-//                     Thread watchThread = new Thread(watch);
-//                     watchThread.start();
-//                     Thread.sleep(500);
+                    // create the thread
+                    Thread watchThread = new Thread(watch);
+                    watchThread.start();
+                    Thread.sleep(500);
 
-//                     System.out.println("Watch Commands: Press 'ENTER' key to exit");
-//                     answer = scanner.nextLine().toUpperCase().trim();
+                    System.out.println("Watch Commands: Press 'ENTER' key to exit");
+                    answer = scanner.nextLine().toUpperCase().trim();
 
-//                     if(answer.equals("")) {
+                    if(answer.equals("")) {
 
-//                         watch.setVisibility(false);
-//                         mode = 100;
-//                         continue;
+                        watch.setVisibility(false);
+                        mode = 100;
+                        continue;
 
-//                     }
+                    }
 
-//                 }
-//                 else if( mode == 2 ) {
+                }
+                else if( mode == 2 ) {
 
-//                     System.out.println("[MODE : Stopwatch]");
+                    System.out.println("[MODE : Stopwatch]");
 
-//                     Stopwatch stopwatch = new Stopwatch();
-//                     Thread stopwatchThread = new Thread (stopwatch);
-//                     stopwatchThread.start();
-//                     Thread.sleep(500);
+                    Stopwatch stopwatch = new Stopwatch();
+                    Thread stopwatchThread = new Thread (stopwatch);
+                    stopwatchThread.start();
+                    Thread.sleep(500);
 
-//                     String command = "";
+                    String command = "";
 
-//                     do {
-//                         System.out.println("Stopwatch commands: START, EXIT");
-//                         System.out.print("Enter command: ");
-//                         command = scanner.nextLine().trim().toUpperCase();
+                    do {
+                        System.out.println("Stopwatch commands: START, EXIT");
+                        System.out.print("Enter command: ");
+                        command = scanner.nextLine().trim().toUpperCase();
 
-//                         if(!command.equals("START") && !command.equals("EXIT")) {
-//                             System.out.println("Invalid Command");
-//                         }
+                        if(!command.equals("START") && !command.equals("EXIT")) {
+                            System.out.println("Invalid Command");
+                        }
 
-//                         if(command.equals("START")) {
-//                             stopwatch.start();
-//                             break;
-//                         }
-//                         if(command.equals("EXIT")) {
-//                             Stopwatch.closeStopwatch = true;
-//                             break;
-//                         }
+                        if(command.equals("START")) {
+                            stopwatch.start();
+                            break;
+                        }
+                        if(command.equals("EXIT")) {
+                            Stopwatch.closeStopwatch = true;
+                            break;
+                        }
                         
-//                     } while(!command.equals("START"));
+                    } while(!command.equals("START"));
                     
-//                     while ( !Stopwatch.closeStopwatch ) {
+                    while ( !Stopwatch.closeStopwatch ) {
 
-//                         System.out.println("Stopwatch commands: START, STOP, RESET, EXIT");
-//                         System.out.print("Enter command: ");
-//                         command = scanner.nextLine().trim().toUpperCase();
+                        System.out.println("Stopwatch commands: START, STOP, RESET, EXIT");
+                        System.out.print("Enter command: ");
+                        command = scanner.nextLine().trim().toUpperCase();
             
-//                         switch (command) {
-//                             case "START":
-//                                 stopwatch.start();
-//                                 break;
-//                             case "STOP":
-//                                 stopwatch.stop();
-//                                 break;
-//                             case "RESET":
-//                                 stopwatch.reset();
-//                                 break;
-//                             case "EXIT":
-//                                 System.out.println("Exiting stopwatch...");
-//                                 stopwatch.stop();
-//                                 Stopwatch.closeStopwatch = true;
-//                                 break;
-//                             default:
-//                                 System.out.println("Invalid command! Use: STOP, RESET, or EXIT.");
-//                         }
-//                     }
+                        switch (command) {
+                            case "START":
+                                stopwatch.start();
+                                break;
+                            case "STOP":
+                                stopwatch.stop();
+                                break;
+                            case "RESET":
+                                stopwatch.reset();
+                                break;
+                            case "EXIT":
+                                System.out.println("Exiting stopwatch...");
+                                stopwatch.stop();
+                                Stopwatch.closeStopwatch = true;
+                                break;
+                            default:
+                                System.out.println("Invalid command! Use: STOP, RESET, or EXIT.");
+                        }
+                    }
                     
-//                 }
-//                 else if( mode == 3 ) {
+                }
+                else if( mode == 3 ) {
 
-//                     System.out.println("[MODE : Timer]");
-//                     boolean runTimer = true;
+                    System.out.println("[MODE : Timer]");
+                    boolean runTimer = true;
                         
-//                     do {
+                    do {
 
-//                         if (!runTimer) break;
+                        if (!runTimer) break;
 
-//                         System.out.print("Enter time in seconds: ");
-//                         int timeInSeconds = Integer.parseInt(scanner.nextLine());
+                        System.out.print("Enter time in seconds: ");
+                        int timeInSeconds = Integer.parseInt(scanner.nextLine());
 
-//                         CountdownTimer countdownTimer = new CountdownTimer(timeInSeconds);
-//                         countdownTimer.start();
+                        CountdownTimer countdownTimer = new CountdownTimer(timeInSeconds);
+                        countdownTimer.start();
 
-//                         System.out.println("Timer Commands: START, EXIT");
-//                         System.out.println("Press 'ENTER' key to close");
-//                         answer = scanner.nextLine().trim();
+                        System.out.println("Timer Commands: START, EXIT");
+                        System.out.println("Press 'ENTER' key to close");
+                        answer = scanner.nextLine().trim();
 
-//                         if(answer.equals("")) {
-//                             countdownTimer.stop();
-//                             System.out.println("Timer stopped");
-//                             continue;
-//                         }
-//                         if(answer.equals("START")) {
-//                             countdownTimer.stop();
-//                             continue;
-//                         }
-//                         if(answer.equals("EXIT")) {
-//                             runTimer = false;
-//                             break;
-//                         }
+                        if(answer.equals("")) {
+                            countdownTimer.stop();
+                            System.out.println("Timer stopped");
+                            continue;
+                        }
+                        if(answer.equals("START")) {
+                            countdownTimer.stop();
+                            continue;
+                        }
+                        if(answer.equals("EXIT")) {
+                            runTimer = false;
+                            break;
+                        }
 
-//                     } while (!answer.equals(""));
+                    } while (!answer.equals(""));
 
-//                     continue;
+                    continue;
 
-//                 }
-//                 else if( mode == 100 ) {
+                }
+                else if( mode == 100 ) {
 
-//                     continue;
+                    continue;
 
-//                 }
-//                 else {
-//                     System.out.println("Invalid selection");
-//                 }
+                }
+                else {
+                    System.out.println("Invalid selection");
+                }
 
-//             } catch (Exception e) {
+            } catch (Exception e) {
 
-//                 System.out.println(e.getMessage());
+                System.out.println(e.getMessage());
 
-//             }
+            }
 
-//         }
+        }
 
-//         scanner.close();
-//         System.out.println("App closed");
+        scanner.close();
+        System.out.println("App closed");
 
-//     }
+    }
 
-// }
+}
