@@ -2,14 +2,14 @@
 .rounded-button {
     -fx-background-radius: 100;
     -fx-border-radius: 100;
-    -fx-background-color:#1558bc;
+    -fx-background-color:#09576b;
     -fx-padding: 8 16;
     -fx-text-fill: white;
     -fx-font-weight: bold;
 }
 
 .active-button {
-    -fx-background-color:#0f3d82;  
+    -fx-border-color:white;
 }
 .text-center {
     -fx-alignment:center;

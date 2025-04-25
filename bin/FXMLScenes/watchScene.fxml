@@ -1,20 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
-<StackPane xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.WatchSceneController">
+<AnchorPane prefHeight="124.0" prefWidth="298.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.WatchSceneController">
    <children>
-      <Label fx:id="watchDisplayLabel" alignment="TOP_CENTER" text="00:00:00">
-         <font>
-            <Font name="Bookman Old Style Bold" size="39.0" />
-         </font>
-      </Label>
+      <VBox layoutX="14.0" layoutY="24.0" maxHeight="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="51.0" prefWidth="274.0" spacing="32.0">
+         <children>
+            <Label fx:id="watchDisplayLabel" alignment="TOP_CENTER" maxWidth="1.7976931348623157E308" prefHeight="47.0" prefWidth="209.0" text="00:00:00">
+               <font>
+                  <Font name="Bookman Old Style Bold" size="39.0" />
+               </font>
+            </Label>
+         </children>
+      </VBox>
+      <RadioButton layoutX="99.0" layoutY="101.0" mnemonicParsing="false" onAction="#toggle24HrsMode" text="24Hrs Clock" textAlignment="CENTER" />
    </children>
-   <padding>
-      <Insets bottom="128.0" />
-   </padding>
-</StackPane>
+</AnchorPane>

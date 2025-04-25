@@ -15,7 +15,7 @@ public class App extends Application {
         Parent root = fxmlLoader.load();
         MainController mainController = fxmlLoader.getController();
 
-        primaryStage.setTitle("Clock APP");
+        primaryStage.setTitle("Clock");
         primaryStage.setScene(new Scene(root));
         mainController.showStartView();
         primaryStage.show();
