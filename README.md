@@ -1,6 +1,15 @@
-## Getting Started
+FlexiSAF Internship Deliverable
 
-Welcome to the VS Code Java world. Here is a guideline to help you get started to write Java code in Visual Studio Code.
+Implementation of a clock with different clock modes. Able to run different modes of the clock using Java thread.
+KEY FEATURES
+- object oriented programming concept
+- classes for watch, stopwatch and timer
+- an interface (e.g ClockMode) to define common methods
+- Use of the scanner class for input
+- use of threads
+
+Further Implementations
+GUI for the clock
 
 ## Folder Structure
 
@@ -8,6 +17,7 @@ The workspace contains two folders by default, where:
 
 - `src`: the folder to maintain sources
 - `lib`: the folder to maintain dependencies
+- `bin`: contained the compiled java classes
 
 Meanwhile, the compiled output files will be generated in the `bin` folder by default.
 
