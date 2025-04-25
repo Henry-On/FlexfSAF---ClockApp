@@ -12,7 +12,7 @@
    <children>
       <AnchorPane fx:id="mainContainer" prefHeight="272.0" prefWidth="286.0" stylesheets="@../styles.css">
          <children>
-            <Label fx:id="lblShowTImer" alignment="TOP_CENTER" layoutX="53.0" layoutY="103.0" text="00:00:00">
+            <Label fx:id="lblShowTImer" alignment="TOP_CENTER" layoutX="85.0" layoutY="112.0" text="00:00">
                <font>
                   <Font name="Bookman Old Style Bold" size="39.0" />
                </font>
@@ -28,8 +28,8 @@
             </AnchorPane>
             <ButtonBar layoutX="39.0" layoutY="195.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="26.0" prefWidth="162.0">
                <buttons>
-                  <Button fx:id="btnPlay" mnemonicParsing="false" onAction="#onBtnPlay" text="Start" />
-                  <Button mnemonicParsing="false" text="Reset" />
+                  <Button fx:id="btnPlay" disable="true" mnemonicParsing="false" onAction="#onBtnPlay" text="Start" />
+                  <Button mnemonicParsing="false" onAction="#onResetTimer" text="Reset" />
                </buttons>
             </ButtonBar>
          </children>

@@ -1,23 +1,20 @@
 package controllers;
-import javafx.application.Application;
+
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
-import javafx.stage.Stage;
 
 public class TimerSceneController {
 
     private boolean running;
-    private Long elapsedTime = 0L;
     private long startTime;
-
+    private long elapsedTime = 0L;
+    private long uSetTime;
+    
     private Thread timerThread;
 
     @FXML 
@@ -50,6 +47,7 @@ public class TimerSceneController {
     private void restrictToMaxValue(TextField textField, int maxValue) {
 
         textField.textProperty().addListener((observable, oldValue, newValue) -> {
+
             // If input is not a number, reset to old value
             if (!newValue.matches("\\d*")) {
                 textField.setText(oldValue);
@@ -58,6 +56,7 @@ public class TimerSceneController {
 
             // If number is greater than 60, reset to old value
             if (!newValue.isEmpty()) {
+
                 try {
                     int value = Integer.parseInt(newValue);
                     if (value > 60) {
@@ -66,6 +65,15 @@ public class TimerSceneController {
                 } catch (NumberFormatException e) {
                     textField.setText(oldValue);
                 }
+
+                // enable @btnPlay button
+                if(btnPlay.isDisabled()) btnPlay.setDisable(false);
+            }
+            else {
+
+                // enable @btnPlay button
+                if(!btnPlay.isDisabled()) btnPlay.setDisable(true);
+
             }
         });
     }
@@ -74,7 +82,7 @@ public class TimerSceneController {
     void onBtnPlay(ActionEvent event) {
 
         if( running ) {
-            stopStopwatch();
+            stopTimer();
             return;  
         }  
         
@@ -82,28 +90,48 @@ public class TimerSceneController {
 
     }
 
-    void startTimer ( ) {
+    void startTimer() {
 
-        if( !running ) startTime = System.currentTimeMillis() - elapsedTime;
+        try {
+            long hours = txtSetHour.getText().isEmpty() ? 0L : Long.parseLong(txtSetHour.getText());
+            long minutes = txtSetMin.getText().isEmpty() ? 0L : Long.parseLong(txtSetMin.getText());
+            long seconds = txtSetSec.getText().isEmpty() ? 0L : Long.parseLong(txtSetSec.getText());
+
+            uSetTime = (hours * 3600 + minutes * 60 + seconds) * 1000; // converts the set time to milliseconds
+
+        } catch (Exception e) {
+            System.out.println("Invalid input: " + e.getMessage());
+        }
+    
+        if (uSetTime < 1) return;
+    
         setRunningState(true);
-        
-        timerThread = new Thread(()->{
+        startTime = System.currentTimeMillis() - elapsedTime;
+    
+        timerThread = new Thread(() -> {
             while (running) {
                 try {
                     elapsedTime = System.currentTimeMillis() - startTime;
-                    updateUICounter( formatTime(elapsedTime) );
-                    Thread.sleep(1);
+                    long remaining = uSetTime - elapsedTime;
+    
+                    if (remaining <= 0) {
+                        TimerSceneController.this.onResetTimer();
+                        break;
+                    }
+    
+                    updateUICounter(formatTime(remaining));
+                    Thread.sleep(100); // sleep for 100ms to reduce CPU usage
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
             }
         });
-
+    
         timerThread.start();
-
     }
+    
 
-    void stopStopwatch ( ) {
+    void stopTimer ( ) {
 
         setRunningState(false);
 
@@ -125,26 +153,33 @@ public class TimerSceneController {
         seconds %= 60;
         minutes %= 60;
 
-        return String.format("%02d:%02d:%02d:%02d", hours, minutes, seconds, (millis % 1000)/10);
+        if(hours > 0) {
+            return String.format("%02d:%02d:%02d:%02d", hours, minutes, seconds, (millis % 1000)/10);
+        }
+        else if(minutes > 0) {
+            return String.format("%02d:%02d:%02d", minutes, seconds, (millis % 1000)/10);
+        }
+
+        return String.format("%02d:%02d",  seconds, (millis % 1000)/10);
+        
     }
 
     @FXML
-    void onResetStopwatch ( ) {
+    void onResetTimer ( ) {
 
         elapsedTime = 0L;
         setRunningState(false);
 
-        updateUICounter(formatTime(elapsedTime));
+        updateUICounter("00:00");
 
     }
 
     private void setRunningState ( boolean running ) {
 
         this.running = running;
-        btnPlay.setText( running ? "Pause" : "Start" );
+        Platform.runLater(() -> {
+            btnPlay.setText(running ? "Pause" : "Start");
+        });
 
     }
-
-
-
 }

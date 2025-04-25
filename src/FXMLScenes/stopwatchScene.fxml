@@ -11,13 +11,13 @@
    <children>
       <AnchorPane fx:id="mainContainer" prefHeight="173.0" prefWidth="246.0">
          <children>
-            <Label layoutX="95.0" layoutY="30.0" text="Remaining time:" />
-            <Label fx:id="lblShowCounter" alignment="TOP_CENTER" layoutX="15.0" layoutY="63.0" text="00:00:00:00">
+            <Label layoutX="68.0" layoutY="30.0" text="Remaining time:" />
+            <Label fx:id="lblShowCounter" alignment="TOP_CENTER" layoutX="27.0" layoutY="63.0" text="00:00:00">
                <font>
                   <Font name="Bookman Old Style Bold" size="39.0" />
                </font>
             </Label>
-            <HBox layoutX="87.0" layoutY="147.0" spacing="16.0">
+            <HBox layoutX="67.0" layoutY="134.0" spacing="16.0">
                <children>
                   <Button fx:id="playButton" mnemonicParsing="false" onAction="#onRunStopwatch" text="Start" />
                   <Button fx:id="btnResetStopwatch" mnemonicParsing="false" onAction="#onResetStopwatch" text="Reset" />
