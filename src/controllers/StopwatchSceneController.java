@@ -87,8 +87,16 @@ public class StopwatchSceneController {
         long hours = minutes / 60;
         seconds %= 60;
         minutes %= 60;
+        
+        if(hours > 0) {
+            return String.format("%02d:%02d:%02d:%02d", hours, minutes, seconds, (millis % 1000)/10);
+        }
+        else if(minutes > 0) {
+            return String.format("%02d:%02d:%02d", minutes, seconds, (millis % 1000)/10);
+        }
 
-        return String.format("%02d:%02d:%02d:%02d", hours, minutes, seconds, (millis % 1000)/10);
+        return String.format("%02d:%02d",  seconds, (millis % 1000)/10);
+
     }
 
     @FXML
