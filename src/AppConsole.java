@@ -1,8 +1,8 @@
 import java.util.Scanner;
 
-import timer.CountdownTimer;
-import watch.Watch;
-import stopwatch.Stopwatch;
+import modes.timer.CountdownTimer;
+import modes.watch.Watch;
+import modes.stopwatch.Stopwatch;
 
 class AppConsole {
 
@@ -28,7 +28,7 @@ class AppConsole {
                 }
                 else if( mode == 1 ) {
 
-                    System.out.println("[MODE : Watch]");
+                    System.out.println("[MODE : Watch] Press 'ENTER' key to exit");
                     
                     Watch watch = new Watch();
                     watch.setVisibility(true);
@@ -37,8 +37,6 @@ class AppConsole {
                     Thread watchThread = new Thread(watch);
                     watchThread.start();
                     Thread.sleep(500);
-
-                    System.out.println("Watch Commands: Press 'ENTER' key to exit");
                     answer = scanner.nextLine().toUpperCase().trim();
 
                     if(answer.equals("")) {

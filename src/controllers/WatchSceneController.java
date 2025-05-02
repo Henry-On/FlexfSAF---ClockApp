@@ -1,11 +1,15 @@
 package controllers;
 
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.control.Label;
+import javafx.scene.input.TouchEvent;
 
 public class WatchSceneController {
 
@@ -21,13 +25,20 @@ public class WatchSceneController {
 
     @FXML
     public void initialize() {
+
         // Called after FXML fields are injected
         startClockThread();
+
     }
 
     @FXML
     public void toggle24HrsMode (ActionEvent event) {
         this.AMPM_MODE = !this.AMPM_MODE;
+    }
+
+    @FXML
+    public void openAlarmSettings( TouchEvent event ) {
+
     }
 
     private void startClockThread() {
@@ -40,8 +51,12 @@ public class WatchSceneController {
 
                 String currentTime = LocalDateTime.now().format(currentTimeTimeFormatter);
 
-                // Update UI safely on JavaFX Application Thread
-                // JavaFX doesnot allow direct updating of the UI from background thread, hence @Platform.runLater()
+                /**
+                 * Update UI safely on JavaFX Application Thread
+                 * JavaFX doesnot allow direct updating of the UI from background thread,
+                 * hence @Platform.runLater()
+                **/ 
+
                 Platform.runLater(() -> watchDisplayLabel.setText(currentTime));
 
                 try {

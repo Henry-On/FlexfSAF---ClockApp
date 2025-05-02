@@ -7,11 +7,8 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.StackPane;
 
 import java.io.IOException;
-
-import controllers.TimerSceneController;
 
 public class MainController {
 
@@ -30,6 +27,7 @@ public class MainController {
     Parent watch;
     Parent stopwatch;
     Parent timer;
+    Parent alarm;
     
     @FXML
     public void initialize() {
@@ -45,8 +43,10 @@ public class MainController {
             FXMLLoader loader3 = new FXMLLoader(getClass().getResource("../FXMLScenes/stopwatchScene.fxml"));
             stopwatch = loader3.load();
 
-            modeContainer.getChildren().addAll(watch, timer, stopwatch);
+            // FXMLLoader alarmLoader = new FXMLLoader(getClass().getResource("../FXMLScenes/alarmScene.fxml"));
+            // alarm = alarmLoader.load();
 
+            modeContainer.getChildren().addAll(watch, timer, stopwatch);
 
         } catch (IOException e) {
             e.printStackTrace();
