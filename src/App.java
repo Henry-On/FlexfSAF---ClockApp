@@ -17,6 +17,7 @@ public class App extends Application {
 
         primaryStage.setTitle("Clock");
         primaryStage.setScene(new Scene(root));
+        primaryStage.setResizable(false);
         mainController.showStartView();
         primaryStage.show();
         

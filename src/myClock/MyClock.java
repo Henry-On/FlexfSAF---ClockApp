@@ -2,7 +2,7 @@ package myClock;
 import java.time.*;
 import java.time.format.DateTimeFormatter;
 
-public class MyClock implements IClockModes {
+public class MyClock implements IClockMethods {
 
 
     int hours, minutes, seconds;
@@ -15,7 +15,7 @@ public class MyClock implements IClockModes {
 
     String timezone;
 
-    public void MyClock () {
+    public MyClock () {
 
         DateTimeFormatter formatAsHour = DateTimeFormatter.ofPattern("HH");
         DateTimeFormatter formatAsMinute = DateTimeFormatter.ofPattern("mm");
@@ -52,21 +52,21 @@ public class MyClock implements IClockModes {
     }
 
     @Override
-    public Thread watch() {
+    public void start() {
         // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'watch'");
+        throw new UnsupportedOperationException("Unimplemented method 'start'");
     }
 
     @Override
-    public Thread stopwatch() {
+    public void stop() {
         // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'stopwatch'");
+        throw new UnsupportedOperationException("Unimplemented method 'stop'");
     }
 
     @Override
-    public Thread timer() {
+    public void reset() {
         // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'timer'");
+        throw new UnsupportedOperationException("Unimplemented method 'reset'");
     }
 
 
